@@ -1,4 +1,4 @@
-package com.example.voreado;
+package io.github.MateuszNk.voreado;
 
 import java.io.*;
 
