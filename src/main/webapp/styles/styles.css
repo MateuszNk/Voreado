@@ -104,3 +104,35 @@ kafelki mają zajmować tyle samo miejsca */
     color: #007AFF;
     word-wrap: break-word;
 }
+
+/* zmieniamy paragraf na element liniowy */
+.discovery-votes {
+    display: inline;
+    color: #007AFF;
+}
+
+/* nadpisanie domyślnych marginesów */
+.discovery-bar > p {
+    margin: 0 4px;
+}
+
+/* zmiana koloru przycisków głosowania po najechaniu */
+.upvote:hover {
+    color: #4CD964;
+}
+
+.downvote:hover {
+    color: #FF3B30;
+}
+
+/* zmiana stopki */
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* max szerokość kolumny 1200px i wyśrodkowanie */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
