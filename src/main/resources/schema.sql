@@ -1,3 +1,19 @@
 DROP DATABASE IF EXISTS voreado;
 CREATE DATABSE voreado CHARACTER SET utf8mb4 COLLATE utf8mb4_polish_ci;
 USE voreado;
+
+CREATE TABLE IF NOT EXISTS category (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL UNIQUE,
+    description VARCHAR(500)
+);
+
+CREATE TABLE IF NOT EXISTS discovery (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(80) NOT NULL,
+    url VARCHAR(500) NOT NULL UNIQUE,
+    description VARCHAR(500) NOT NULL,
+    date_added DATETIME NOT NULL,
+    category_id INT NOT NULL,
+    FOREIGN KEY (category_id) REFERENCES category (id)
+);

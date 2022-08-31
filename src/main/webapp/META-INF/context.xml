@@ -1,9 +1,13 @@
 <Context>
+    <!-- # WARNING # -->
+    <!-- I AM USING SIMPLE USERNAME AND PASSWORD FOR EDUCATIONAL PURPOSES ONLY
+         IT IS NOT RECOMMENDED TO USE A ROOT ACCOUNT AND A SIMPLE PASSWORD LIKE THIS
+    -->
     <Resource name="jdbc/voreado"
               factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
               type="javax.sql.DataSource"
-              username="username"
-              password="your_password"
-              driverClassName="com.mysql.jdbc.Driver"
-              url="jdbc://localhost/3306/voreado?serverTimezone=UTC"/>
+              username="root"
+              password="matiadmin"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/voreado?serverTimezone=UTC"/>
 </Context>

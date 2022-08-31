@@ -13,10 +13,9 @@ public class DataSourceProvider {
     public static DataSource getDataSource() throws NamingException {
         if (dataSource == null) {
             Context initContext = new InitialContext();
-            Context envContext = (Context) initContext.lookup("java:comp/env");
+            Context envContext = (Context) initContext.lookup("java:comp/env/");
             dataSource = (DataSource) envContext.lookup("jdbc/voreado");
         }
-
         return dataSource;
     }
 }
