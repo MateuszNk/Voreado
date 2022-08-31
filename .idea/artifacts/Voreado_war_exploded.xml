@@ -13,6 +13,11 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Voreado" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-mxj:5.0.12" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-mxj-db-files:5.0.12" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.17" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/Voreado-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />

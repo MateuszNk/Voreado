@@ -1,0 +1,9 @@
+<Context>
+    <Resource name="jdbc/voreado"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              type="javax.sql.DataSource"
+              username="username"
+              password="your_password"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc://localhost/3306/voreado?serverTimezone=UTC"/>
+</Context>
