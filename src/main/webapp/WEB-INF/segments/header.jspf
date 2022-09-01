@@ -1,0 +1,8 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
+<nav class="navbar">
+    <a href="${pageContext.request.contextPath}" class="logo">
+        <i class="fa-solid fa-newspaper"></i>
+        Voreado
+    </a>
+    <a href="#" class="login-button">Sign In</a>
+</nav>

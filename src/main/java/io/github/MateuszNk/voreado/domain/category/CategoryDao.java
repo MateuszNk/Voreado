@@ -1,6 +1,7 @@
 package io.github.MateuszNk.voreado.domain.category;
 
 import io.github.MateuszNk.voreado.config.DataSourceProvider;
+import io.github.MateuszNk.voreado.domain.common.BaseDao;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -9,17 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class CategoryDao {
-    private final DataSource dataSource;
-
-    public CategoryDao() {
-        try {
-            this.dataSource = DataSourceProvider.getDataSource();
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+public class CategoryDao extends BaseDao {
     public List<Category> findAll() {
         final String query = """
                 SELECT
@@ -27,7 +18,7 @@ public class CategoryDao {
                 FROM
                 category
                 """;
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             List<Category> allCategories = new ArrayList<>();
@@ -57,7 +48,7 @@ public class CategoryDao {
                 WHERE
                     id = ?
                 """;
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();

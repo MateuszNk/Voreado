@@ -1,6 +1,7 @@
 package io.github.MateuszNk.voreado.domain.discovery;
 
 import io.github.MateuszNk.voreado.config.DataSourceProvider;
+import io.github.MateuszNk.voreado.domain.common.BaseDao;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -9,17 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiscoveryDao {
-    private final DataSource dataSource;
-
-    public DiscoveryDao() {
-        try {
-            this.dataSource = DataSourceProvider.getDataSource();
-        } catch (NamingException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+public class DiscoveryDao extends BaseDao {
     public List<Discovery> findAll() {
         final String query = """
     SELECT
@@ -27,7 +18,7 @@ public class DiscoveryDao {
     FROM
         discovery d
     """;
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(query);
             List<Discovery> allDiscoveries = new ArrayList<>();
@@ -60,7 +51,7 @@ public class DiscoveryDao {
                 WHERE
                 category_id = ?
                 """;
-        try (Connection connection = dataSource.getConnection();
+        try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, categoryId);
             ResultSet resultSet = preparedStatement.executeQuery();
