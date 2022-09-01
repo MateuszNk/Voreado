@@ -9,12 +9,13 @@
     <title>Voreado</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/styles.css">
+    <script src="https://kit.fontawesome.com/5c6b760006.js" crossorigin="anonymous"></script>
     <!-- default font - to change -->
 </head>
 <body>
 <div class="container">
     <nav class="navbar">
-        <a href="#" class="logo">
+        <a href="${pageContext.request.contextPath}" class="logo">
             <i class="fa-solid fa-newspaper"></i>
             Voreado
         </a>
@@ -23,9 +24,11 @@
 
     <aside class="categories">
         <ul>
-            <li><a href="#">Politics</a></li>
-            <li><a href="#">Programming</a></li>
-            <li><a href="#">Business</a></li>
+            <c:forEach var="category" items="${requestScope.categories}">
+                <li>
+                    <a href="${pageContext.request.contextPath.concat('/category?id=').concat(category.id)}">${category.name}</a>
+                </li>
+            </c:forEach>
         </ul>
     </aside>
 

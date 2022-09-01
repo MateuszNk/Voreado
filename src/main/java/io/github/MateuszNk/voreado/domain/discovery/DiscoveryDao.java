@@ -4,10 +4,7 @@ import io.github.MateuszNk.voreado.config.DataSourceProvider;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +49,29 @@ public class DiscoveryDao {
         LocalDateTime dateAdded = resultSet.getTimestamp("date_added").toLocalDateTime();
         int categoryId = resultSet.getInt("category_id");
         return new Discovery(discoveryId, title, url, description, dateAdded, categoryId);
+    }
+
+    public List<Discovery> findByCategory(int categoryId) {
+        final String query = """
+                SELECT
+                id, title, url, description, date_added, category_id
+                FROM
+                discovery
+                WHERE
+                category_id = ?
+                """;
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, categoryId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Discovery> discoveries = new ArrayList<>();
+            while (resultSet.next()) {
+                Discovery discovery = mapRow(resultSet);
+                discoveries.add(discovery);
+            }
+            return discoveries;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
