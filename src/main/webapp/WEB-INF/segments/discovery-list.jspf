@@ -12,11 +12,21 @@
         </a>
         <p><c:out value="${discovery.description}"/></p>
         <section class="discovery-bar">
-            <a href="#" class="discovery-link upvote">
+            <a href="${pageContext.request.contextPath
+                        .concat('/discovery/vote?id=')
+                        .concat(discovery.id)
+                        .concat('&type=UP')}"
+               class="discovery-link upvote">
                 <i class="fa-solid fa-circle-arrow-up"></i>
             </a>
+
             <p class="discovery-votes">32</p>
-            <a href="#" class="discovery-link downvote">
+
+            <a href="${pageContext.request.contextPath
+                        .concat('/discovery/vote?id=')
+                        .concat(discovery.id)
+                        .concat('&type=DOWN')}"
+               class="discovery-link downvote">
                 <i class="fa-solid fa-circle-arrow-down"></i>
             </a>
         </section>
