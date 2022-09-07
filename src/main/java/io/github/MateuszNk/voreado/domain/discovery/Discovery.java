@@ -10,24 +10,40 @@ public class Discovery {
     private LocalDateTime dateAdded;
     private Integer categoryId;
 
-    public Discovery(Integer id,
-                     String title,
+    private Integer userId;
+
+    public Discovery(String title,
                      String url,
                      String description,
                      LocalDateTime dateAdded,
-                     Integer categoryId) {
-        this.id = id;
+                     Integer categoryId,
+                     Integer userId) {
         this.title = title;
         this.url = url;
         this.description = description;
         this.dateAdded = dateAdded;
         this.categoryId = categoryId;
+        this.userId = userId;
     }
 
+    public Discovery(Integer id,
+                     String title,
+                     String url,
+                     String description,
+                     LocalDateTime dateAdded,
+                     Integer categoryId,
+                     Integer userId) {
+        this(title, url, description, dateAdded, categoryId, userId);
+        this.id = id;
+    }
+
+    public void setId(Integer id) { this.id = id; }
     public Integer getId() { return id; }
     public String getTitle() { return title; }
     public String getUrl() { return url; }
     public String getDescription() { return description; }
     public LocalDateTime getDateAdded() { return dateAdded; }
     public Integer getCategoryId() { return categoryId; }
+
+    public Integer getUserId() { return userId; }
 }

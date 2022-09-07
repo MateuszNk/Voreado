@@ -14,7 +14,7 @@ public class DiscoveryDao extends BaseDao {
     public List<Discovery> findAll() {
         final String query = """
     SELECT
-        id, title, url, description, date_added, category_id
+        id, title, url, description, date_added, category_id, user_id
     FROM
         discovery d
     """;
@@ -39,13 +39,14 @@ public class DiscoveryDao extends BaseDao {
         String description = resultSet.getString("description");
         LocalDateTime dateAdded = resultSet.getTimestamp("date_added").toLocalDateTime();
         int categoryId = resultSet.getInt("category_id");
-        return new Discovery(discoveryId, title, url, description, dateAdded, categoryId);
+        int userId = resultSet.getInt("user_id");
+        return new Discovery(discoveryId, title, url, description, dateAdded, categoryId, userId);
     }
 
     public List<Discovery> findByCategory(int categoryId) {
         final String query = """
                 SELECT
-                id, title, url, description, date_added, category_id
+                id, title, url, description, date_added, category_id, user_id
                 FROM
                 discovery
                 WHERE
@@ -62,6 +63,33 @@ public class DiscoveryDao extends BaseDao {
             }
             return discoveries;
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void save(Discovery discovery) {
+        final String query = """
+                INSERT INTO
+                    discovery (title, url, description, date_added, category_id, user_id)
+                VALUES
+                    (?, ?, ?, ?, ?, ?)
+                """;
+
+        try (Connection connection = getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, discovery.getTitle());
+            preparedStatement.setString(2, discovery.getUrl());
+            preparedStatement.setString(3, discovery.getDescription());
+            preparedStatement.setObject(4, discovery.getDateAdded());
+            preparedStatement.setInt(5, discovery.getCategoryId());
+            preparedStatement.setInt(6, discovery.getUserId());
+            preparedStatement.executeUpdate();
+
+            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                discovery.setId(generatedKeys.getInt(1));
+            }
+        } catch (SQLException e ) {
             throw new RuntimeException(e);
         }
     }
