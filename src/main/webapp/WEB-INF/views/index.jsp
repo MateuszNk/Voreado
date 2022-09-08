@@ -15,7 +15,10 @@
         <ul>
             <c:forEach var="category" items="${requestScope.categories}">
                 <li>
-                    <a href="${pageContext.request.contextPath.concat('/category?id=').concat(category.id)}">${category.name}</a>
+                    <a href="${pageContext.request.contextPath
+                                .concat('/category?id=')
+                                .concat(category.id)}">
+                            ${category.name}</a>
                 </li>
             </c:forEach>
         </ul>
